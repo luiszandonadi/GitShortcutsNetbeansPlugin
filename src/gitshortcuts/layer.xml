@@ -6,6 +6,9 @@
             <file name="gitshortcuts-OpenGitGui.instance"/>
             <file name="gitshortcuts-OpenGitk.instance"/>
         </folder>
+        <folder name="Versioning">
+            <file name="gitshortcuts-GitInitAction.instance"/>
+        </folder>
     </folder>
     <folder name="Toolbars">
         <folder name="File">
@@ -26,5 +29,13 @@
         <file name="C-A-k.shadow">
             <attr name="originalFile" stringvalue="Actions/Other/gitshortcuts-OpenGitk.instance"/>
         </file>
+    </folder>
+       <folder name="Menu">
+        <folder name="Versioning">
+            <attr name="gitshortcuts-GitInitAction.shadow/org-netbeans-modules-versioning-VersioningMainMenu.instance" boolvalue="true"/>
+            <file name="gitshortcuts-GitInitAction.shadow">
+                <attr name="originalFile" stringvalue="Actions/Versioning/gitshortcuts-GitInitAction.instance"/>
+            </file>
+        </folder>
     </folder>
 </filesystem>
