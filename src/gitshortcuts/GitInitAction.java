@@ -77,7 +77,7 @@ public final class GitInitAction extends CookieAction {
 
     @Override
     protected String iconResource() {
-        return "gitshortcuts/init.png";
+        return "gitshortcuts/init2.gif";
     }
 
     public HelpCtx getHelpCtx() {
