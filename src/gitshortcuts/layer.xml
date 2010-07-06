@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE filesystem PUBLIC "-//NetBeans//DTD Filesystem 1.1//EN" "http://www.netbeans.org/dtds/filesystem-1_1.dtd">
+<filesystem>
+    <folder name="Actions">
+        <folder name="Other">
+            <file name="gitshortcuts-OpenGitGui.instance"/>
+            <file name="gitshortcuts-OpenGitk.instance"/>
+        </folder>
+    </folder>
+    <folder name="Toolbars">
+        <folder name="File">
+            <file name="gitshortcuts-OpenGitGui.shadow">
+                <attr name="originalFile" stringvalue="Actions/Other/gitshortcuts-OpenGitGui.instance"/>
+                <attr name="position" intvalue="0"/>
+            </file>
+            <file name="gitshortcuts-OpenGitk.shadow">
+                <attr name="originalFile" stringvalue="Actions/Other/gitshortcuts-OpenGitk.instance"/>
+                <attr name="position" intvalue="-100"/>
+            </file>
+        </folder>
+    </folder>
+    <folder name="Shortcuts">
+        <file name="C-A-g.shadow">
+            <attr name="originalFile" stringvalue="Actions/Other/gitshortcuts-OpenGitGui.instance"/>
+        </file>
+        <file name="C-A-k.shadow">
+            <attr name="originalFile" stringvalue="Actions/Other/gitshortcuts-OpenGitk.instance"/>
+        </file>
+    </folder>
+</filesystem>
