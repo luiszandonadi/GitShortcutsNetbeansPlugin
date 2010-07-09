@@ -30,14 +30,13 @@ public final class GitInitAction extends CookieAction {
         final String projectPath = File.separator + primaryFile.getParent().getPath();
         Project[] openProjects = OpenProjects.getDefault().getOpenProjects();
         try {
-
             InputOutput io = IOProvider.getDefault().getIO("Git Init", false);
+            io.setFocusTaken(true);
             io.getOut().reset();
             IOColorLines.println(io, "Initializing a new git repository....", Color.RED);
             for (Project project : openProjects) {
                 String path = project.getProjectDirectory().getPath();
                 if (projectPath.contains(path)) {
-
                     IOColorLines.println(io, "Checking for a git repository at " + path, Color.RED);
                     File file = new File(path);
                     Boolean isDirectory = false;
