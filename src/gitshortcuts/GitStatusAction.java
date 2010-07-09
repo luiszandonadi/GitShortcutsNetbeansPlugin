@@ -38,6 +38,7 @@ public final class GitStatusAction extends CookieAction {
         try {
 
             io.getOut().reset();
+            io.setFocusTaken(true);
             IOColorLines.println(io, "Reading git repository....", Color.BLACK);
             for (Project project : openProjects) {
                 String path = project.getProjectDirectory().getPath();
