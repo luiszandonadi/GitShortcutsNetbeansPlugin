@@ -12,8 +12,10 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import org.netbeans.api.project.Project;
 import org.netbeans.api.project.ui.OpenProjects;
+import org.openide.awt.NotificationDisplayer;
 import org.openide.cookies.EditorCookie;
 import org.openide.filesystems.FileObject;
 import org.openide.loaders.DataObject;
@@ -67,7 +69,8 @@ public final class GitStatusAction extends CookieAction {
                             }
                         }
                     } else {
-                        IOColorLines.println(io, path + " is not a git repository!!!", Color.RED);
+                        NotificationDisplayer.getDefault().notify("Git Init", new ImageIcon(), "Git repository not found!!!!!", null);
+                        IOColorLines.println(io, path + "Git repository not found!!!!!", Color.RED);
                     }
 
 

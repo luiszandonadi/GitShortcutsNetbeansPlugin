@@ -5,18 +5,30 @@
 package gitshortcuts;
 
 import java.awt.Color;
+import java.awt.TrayIcon.MessageType;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import org.netbeans.api.project.Project;
 import org.netbeans.api.project.ui.OpenProjects;
+import org.openide.DialogDisplayer;
+import org.openide.NotifyDescriptor;
+import org.openide.awt.NotificationDisplayer;
 import org.openide.cookies.EditorCookie;
 import org.openide.filesystems.FileObject;
 import org.openide.loaders.DataObject;
 import org.openide.nodes.Node;
 import org.openide.util.HelpCtx;
+import org.openide.util.Lookup;
 import org.openide.util.NbBundle;
+import org.openide.util.NbCollections;
+import org.openide.util.Utilities;
+import org.openide.util.actions.ActionInvoker;
 import org.openide.util.actions.CookieAction;
 import org.openide.windows.IOColorLines;
 import org.openide.windows.IOProvider;
@@ -46,11 +58,24 @@ public final class GitInitAction extends CookieAction {
                         IOColorLines.println(io, e.getMessage(), Color.BLUE);
                     }
                     if (isDirectory) {
+//                        final Node[] nodes = activatedNodes;
+//                        ActionListener actionListener = new ActionListener() {
+//
+//                            @Override
+//                            public void actionPerformed(ActionEvent e) {
+//
+//                                GitStatusAction lookup = Lookup.getDefault().lookup(GitStatusAction.class);
+//                                lookup.performAction(nodes);
+//
+//                            }
+//                        };
+                        NotificationDisplayer.getDefault().notify("Git Init", new ImageIcon(), "Already exists a git repository!!!", null);
                         IOColorLines.println(io, "Already exists a git repository!!!", Color.RED);
                     } else {
                         IOColorLines.println(io, "Creating on " + path, Color.RED);
                         Runtime.getRuntime().exec("git init", null, file);
-                        IOColorLines.println(io, "Created git repository!!!" , Color.RED);
+                        IOColorLines.println(io, "Git repository created!!!", Color.RED);
+                        NotificationDisplayer.getDefault().notify("Git Init", new ImageIcon(), "Git repository created !!!", null);
                     }
                 }
             }
