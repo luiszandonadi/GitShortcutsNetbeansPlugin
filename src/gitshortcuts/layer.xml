@@ -9,6 +9,7 @@
         <folder name="Versioning">
             <file name="gitshortcuts-GitInitAction.instance"/>
             <file name="gitshortcuts-GitStatusAction.instance"/>
+            <file name="gitshortcuts-GitDiffAction.instance"/>
         </folder>
     </folder>
     <folder name="Toolbars">
@@ -33,6 +34,9 @@
         <file name="C-A-s.shadow">
             <attr name="originalFile" stringvalue="Actions/Versioning/gitshortcuts-GitStatusAction.instance"/>
         </file>
+        <file name="C-A-d.shadow">
+            <attr name="originalFile" stringvalue="Actions/Versioning/gitshortcuts-GitDiffAction.instance"/>
+        </file>
     </folder>
        <folder name="Menu">
         <folder name="Versioning">
@@ -42,6 +46,9 @@
             </file>
             <file name="gitshortcuts-GitStatusAction.shadow">
                 <attr name="originalFile" stringvalue="Actions/Versioning/gitshortcuts-GitStatusAction.instance"/>
+            </file>
+            <file name="gitshortcuts-GitDiffAction.shadow">
+                <attr name="originalFile" stringvalue="Actions/Versioning/gitshortcuts-GitDiffAction.instance"/>
             </file>
         </folder>
     </folder>
