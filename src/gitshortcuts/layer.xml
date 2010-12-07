@@ -10,6 +10,7 @@
             <file name="gitshortcuts-GitInitAction.instance"/>
             <file name="gitshortcuts-GitStatusAction.instance"/>
             <file name="gitshortcuts-GitDiffAction.instance"/>
+            <file name="gitshortcuts-GitCheckoutAction.instance"/>
         </folder>
     </folder>
     <folder name="Toolbars">
@@ -49,6 +50,9 @@
             </file>
             <file name="gitshortcuts-GitDiffAction.shadow">
                 <attr name="originalFile" stringvalue="Actions/Versioning/gitshortcuts-GitDiffAction.instance"/>
+            </file>
+            <file name="gitshortcuts-GitCheckoutAction.shadow">
+                <attr name="originalFile" stringvalue="Actions/Versioning/gitshortcuts-GitCheckoutAction.instance"/>
             </file>
         </folder>
     </folder>

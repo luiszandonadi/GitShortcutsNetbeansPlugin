@@ -57,7 +57,7 @@ public final class GitDiffAction extends CookieAction {
                     out.close();
 
 
-                    diff2(new File(primaryFile.getPath()), temp, primaryFile.getName());
+                    diff2(new File(primaryFile.getPath()), temp, primaryFile.getNameExt());
 
 
 //                    System.out.println("-----------------------------------------");
@@ -109,7 +109,7 @@ public final class GitDiffAction extends CookieAction {
                         }
                     };
 
-                    tc.setDisplayName("Diff Viewer");
+                    tc.setDisplayName("Diff Viewer - " + fileName);
                     tc.setLayout(new BorderLayout());
                     tc.add(view.getComponent(), BorderLayout.CENTER);
                     tc.open();
