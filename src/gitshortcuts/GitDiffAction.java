@@ -48,7 +48,7 @@ public final class GitDiffAction extends CookieAction {
                     BufferedReader br = new BufferedReader(isr);
 
                     String line = null;
-                    File temp = File.createTempFile(primaryFile.getName(), ".temp");
+                    File temp = File.createTempFile(primaryFile.getNameExt(), ".temp");
                     BufferedWriter out = new BufferedWriter(new FileWriter(temp));
                     while ((line = br.readLine()) != null) {
                         out.write(line);
