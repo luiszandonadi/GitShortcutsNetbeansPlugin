@@ -4,12 +4,18 @@
  */
 package gitshortcuts;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.Writer;
 import org.netbeans.api.diff.Difference;
 import org.netbeans.api.diff.StreamSource;
+import org.openide.util.Exceptions;
 
 /**
  *
@@ -26,14 +32,25 @@ public class DiffStreamSource extends StreamSource {
         this.file = file;
         if (editable != null) {
             this.editable = editable;
+            this.file.setWritable(editable);
         }
 
 
     }
 
     public void save() {
-        
-        
+//        try {
+//            BufferedInputStream inputStream = new BufferedInputStream(new FileInputStream(file));
+//            InputStreamReader isr = new InputStreamReader(inputStream);
+//                    BufferedReader br = new BufferedReader(isr);
+//                    String line = null;
+//                    while ((line = br.readLine()) != null) {
+//                        System.out.println(line);
+//                    }
+//        } catch (Exception ex) {
+//            Exceptions.printStackTrace(ex);
+//        } 
+               
     }
 
     @Override

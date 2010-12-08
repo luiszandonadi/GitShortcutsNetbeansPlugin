@@ -17,15 +17,20 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.Collection;
+import javax.swing.Action;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.JToolBar;
 import javax.swing.SwingUtilities;
-import org.netbeans.api.diff.DiffController;
+import org.netbeans.api.diff.Diff;
+import org.netbeans.api.diff.DiffView;
 import org.netbeans.api.diff.Difference;
 import org.netbeans.api.diff.StreamSource;
 import org.netbeans.api.project.Project;
 import org.netbeans.api.project.ui.OpenProjects;
+import org.netbeans.spi.diff.DiffControllerImpl;
 import org.netbeans.spi.diff.DiffProvider;
 import org.openide.awt.NotificationDisplayer;
 import org.openide.cookies.EditorCookie;
@@ -41,7 +46,10 @@ import org.openide.util.actions.CookieAction;
 import org.openide.windows.TopComponent;
 
 public final class GitDiffAction extends CookieAction implements PropertyChangeListener {
-
+private TopComponent topComponent;
+private DiffStreamSource local;
+private StreamSource remote;
+private DiffView diffView;
     @Override
     protected void performAction(Node[] activatedNodes) {
         DataObject dataObject = activatedNodes[0].getLookup().lookup(DataObject.class);
@@ -67,7 +75,7 @@ public final class GitDiffAction extends CookieAction implements PropertyChangeL
                         out.newLine();
                     }
                     out.close();
-                    diff2(FileUtil.toFile(primaryFile), temp, primaryFile.getNameExt(), primaryFile.getMIMEType());
+                    diff2(primaryFile, FileUtil.toFile(primaryFile), temp, primaryFile.getNameExt(), primaryFile.getMIMEType());
                 }
             }
         } catch (IOException ex) {
@@ -75,24 +83,28 @@ public final class GitDiffAction extends CookieAction implements PropertyChangeL
         }
     }
 
-    public void diff2(final File file, final File temp, final String fileName, final String mimeType) {
-        SwingUtilities.invokeLater(new Runnable() {
+    public void diff2(final FileObject primaryFile, final File file, final File temp, final String fileName, final String mimeType) {
+        SwingUtilities.invokeLater(new Runnable()    {
 
             @Override
             public void run() {
                 try {
-                    StreamSource remote = StreamSource.createSource("HEAD",
+                    remote = StreamSource.createSource("HEAD",
                             "HEAD", mimeType, temp);
-                    final DiffStreamSource local = new DiffStreamSource(fileName,
+                    local = new DiffStreamSource(fileName,
                             fileName, mimeType, file, true);
-                  
 
-                    DiffProvider diffProvider = Lookup.getDefault().lookup(DiffProvider.class);
+
+                    final DiffProvider diffProvider = Lookup.getDefault().lookup(DiffProvider.class);
                     Difference[] diffs = diffProvider.computeDiff(remote.createReader(), local.createReader());
 
                     if (diffs.length > 0) {
-                         DiffController create = DiffController.createEnhanced(remote, local);
-                        TopComponent tc = new TopComponent() {
+                          diffView = Diff.getDefault().createDiff(remote, local);
+
+//                        DiffController create = DiffController.createEnhanced(remote, local);
+
+
+                        topComponent = new TopComponent()    {
 
                             @Override
                             protected void componentClosed() {
@@ -100,49 +112,54 @@ public final class GitDiffAction extends CookieAction implements PropertyChangeL
                                 temp.deleteOnExit();
                                 temp.delete();
                             }
-
-
-
                         };
-                        tc.setDisplayName("Diff Viewer - " + fileName);
-                        tc.setLayout(new BorderLayout());
+                        topComponent.setDisplayName("Diff Viewer - " + fileName);
+                        topComponent.setLayout(new BorderLayout());
                         JPanel panel = new JPanel();
                         panel.setLayout(new GridLayout(2, 1));
-                        panel.add(create.getJComponent(), BorderLayout.CENTER);
+//                        panel.add(create.getJComponent(), BorderLayout.CENTER);
+                        panel.add(diffView.getComponent(), BorderLayout.CENTER);
                         final JButton jButton = new JButton("OK");
-                        jButton.addActionListener(new ActionListener() {
+                        jButton.addActionListener(new ActionListener()    {
 
                             @Override
                             public void actionPerformed(ActionEvent e) {
 
+                                save();
 
 
-//                                    System.out.println(Lookup.getDefault().lookup(EditorCookie.class));
 
-//                                try {
-//                                    Lookup.getDefault().lookup(SaveCookie.class).save();
-//                                } catch (IOException ex) {
-//                                    Exceptions.printStackTrace(ex);
-//                                }
+
                             }
                         });
                         panel.add(jButton);
-                        tc.add(panel);
-                        tc.open();
-                        tc.requestActive();
+                        topComponent.add(panel);
+                        topComponent.open();
+                        topComponent.requestActive();
+                        
+                        
                     } else {
                         NotificationDisplayer.getDefault().notify("Git diff", new ImageIcon(), "No diff found!!!!!", null);
                     }
                 } catch (IOException ex) {
                 }
             }
-
-           
         });
     }
 
-
-  
+    private void save() {
+        //        System.out.println(topComponent.getDisplayName());
+        //        Action[] actions = topComponent.getActions();
+        //        for (Action action : actions) {
+        //            System.out.println(action);
+        //        }
+        Collection<? extends Diff> all = Diff.getAll();
+        for (Diff diff : all) {
+//            System.out.println(diff.);
+        }
+        
+        
+    }
 
     protected int mode() {
         return CookieAction.MODE_EXACTLY_ONE;
