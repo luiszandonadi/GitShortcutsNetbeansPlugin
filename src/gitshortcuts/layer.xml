@@ -35,7 +35,7 @@
         <file name="C-A-s.shadow">
             <attr name="originalFile" stringvalue="Actions/Versioning/gitshortcuts-GitStatusAction.instance"/>
         </file>
-        <file name="C-A-d.shadow">
+        <file name="A-d.shadow">
             <attr name="originalFile" stringvalue="Actions/Versioning/gitshortcuts-GitDiffAction.instance"/>
         </file>
     </folder>
